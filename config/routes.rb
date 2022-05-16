@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :saved_movies, only: [:index, :create, :update, :destroy]
+  resources :movies, only: [:index]
+  resources :users, except: [:index]
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  #Custom routes for login, persistance, and logout
+  post "/login", to: "session#create"
+  get "/userInSession", to: "session#get_user_in_session"
+  delete "/logout", to: "session#destroy"
+  
 end

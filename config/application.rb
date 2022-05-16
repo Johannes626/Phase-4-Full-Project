@@ -35,5 +35,12 @@ module ProjectBackendPhase4
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    #Adding back cookies and session middleware
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
+    # Use SameSite=Strict for all cookies to help protect against CSRF. 
+    ## CSRF = Cross-Site Request Forgery, an attack that forces authenticated
+    ## users to submit a request to a Web application against which they are currently authenticated. CSRF attacks exploit the trust a Web application has in an authenticated user.
+    config.action_dispatch.cookies_same_site_protection = :strict
   end
 end
